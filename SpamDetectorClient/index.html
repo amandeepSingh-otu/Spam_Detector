@@ -25,6 +25,67 @@
 <body>
 
   <!-- Add your site or application content here -->
+  <nav class="nav-bar">
+
+    <h2>Spam Detector Dashboard</h2>
+
+  </nav>
+  <div class="body-ref" >
+    <aside class="side-bar" id="sidebar">
+
+      <li id="Dashboard" onclick="loadBody()">
+        <a href="#">Dashboard</a>
+      </li>
+      <li id="About" onclick="loadAbout()">
+        <a href="#">About</a>
+      </li>
+
+    </aside>
+    <div class="body-sec" id="body-sec">
+      <div class="analysis-sec">
+        <div class="table-div" id="table-ref">
+          <h3>Spam Analysis Dashboard</h3>
+          <p>This table below displays the results of our spam detector algorithm</p>
+          <div>
+            <table id ="files">
+              <thead>
+              <tr>
+                <th id="File">File</th>
+                <th id="Spam-Pro">Spam Probability(%)</th>
+                <th id="class">Class</th>
+
+              </tr>
+              </thead>
+              <tbody id="table-body-ref">
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <div class="precision-div" id="precision-sec">
+        <p>Performance of the model</p>
+        <div class="form">
+          <form >
+            <label >Accuracy:</label><br>
+            <output type="number" id="accuracy" name="accuracy"  ><br>
+
+              <label >Precision:</label><br>
+              <output type="number" id="precision" name="precision" ><br>
+          </form>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <footer>
+    <p>copyright &#169 CSCI2020U-Winter 2024</p>
+
+  </footer>
 
 
 
