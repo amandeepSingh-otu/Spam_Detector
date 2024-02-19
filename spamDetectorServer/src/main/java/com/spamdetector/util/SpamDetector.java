@@ -87,22 +87,23 @@ public class SpamDetector {
 
     ;
     //give prob of word being spam
-    public double getProbabilityOfWord(String word){
-        double probFileIsSpamHaveThisWord=0.0f;
-        int p=(null==spamOccurrences.get(word))?0:spamOccurrences.get(word);
-        int z=(null==hamOccurrences.get(word))?0:hamOccurrences.get(word);
-        if(p==0 && z==0){
+    public double getProbabilityOfWord(String word,double totalSpam, double totalHam){
+        double probFileIsSpamHaveThisWord=0.0;
+        double probOfSpam=(null==spamOccurrences.get(word))?0:spamOccurrences.get(word);
+        double probOfHam=(null==hamOccurrences.get(word))?0:hamOccurrences.get(word);
+        if(probOfHam==0 || probOfSpam==0){
             return 0.0;
         }
-        probFileIsSpamHaveThisWord= ((double)p/spamOccurrences.size())/(((double) p/spamOccurrences.size())+((double)((z)/hamOccurrences.size())));
+        probFileIsSpamHaveThisWord=(probOfSpam/totalSpam)/((probOfHam/totalHam)+(probOfSpam/totalSpam));
         return probFileIsSpamHaveThisWord;
     }
-    public double probFileIsSpam(File file) throws IOException {
-        double probFileIsSpamf=0.0f;
-        double sumsOfAllProb=0.0f;
+    public double probFileIsSpam(String directory,File file) throws IOException {
+        double probFileIsSpamf=0.0;
+        double sumsOfAllProb=0.0;
         FileReader fileReader = null;
+        String path=directory+"\\"+file.getName();
         try {
-            fileReader = new FileReader(file);
+            fileReader = new FileReader(path);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +121,7 @@ public class SpamDetector {
                     if(p==0){
                         continue;
                     }
-                    sumsOfAllProb += (double) (Math.log(1 - p) - Math.log(p));
+                    sumsOfAllProb += (Math.log(1 - p) - Math.log(p));
                 }
             }
         }
@@ -150,13 +151,12 @@ public class SpamDetector {
         File[] testSpam1 = new File(pathTrainSpam).listFiles();
         numberOfOccurrence(pathTrainHam,testHam1, true);
         numberOfOccurrence(pathTrainSpam,testSpam1, false);
-        hamOccurrences.put("hello",1);
 
             for (String key : hamOccurrences.keySet()) {
-                probOfAllWords.put(key, getProbabilityOfWord(key));
+                probOfAllWords.put(key, getProbabilityOfWord(key, testSpam1.length,testHam1.length));
             }
-        for (String key : spamOccurrences.keySet()) {
-                probOfAllWords.put(key, getProbabilityOfWord(key));
+            for (String key : spamOccurrences.keySet()) {
+                probOfAllWords.put(key, getProbabilityOfWord(key,testSpam1.length,testHam1.length));
             }
     }
 
@@ -169,12 +169,12 @@ public class SpamDetector {
         File[] testSpam = new File(pathTrainSpam).listFiles();
         assert testHam != null;
         for(File file: testHam){
-            TestFile testFile=new TestFile(file.getName(), probFileIsSpam(file),"Ham");
+            TestFile testFile=new TestFile(file.getName(), probFileIsSpam(pathTrainHam,file),"Ham");
             testFileWithProb.add(testFile);
         };
         assert testSpam != null;
         for(File file: testSpam){
-            TestFile testFile=new TestFile(file.getName(),probFileIsSpam(file),"Spam");
+            TestFile testFile=new TestFile(file.getName(),probFileIsSpam(pathTrainSpam,file),"Spam");
             testFileWithProb.add(testFile);
         };
         return testFileWithProb;
