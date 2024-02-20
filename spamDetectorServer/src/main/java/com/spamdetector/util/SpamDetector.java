@@ -153,10 +153,14 @@ public class SpamDetector {
         numberOfOccurrence(pathTrainSpam,testSpam1, false);
 
             for (String key : hamOccurrences.keySet()) {
-                probOfAllWords.put(key, getProbabilityOfWord(key, testSpam1.length,testHam1.length));
+                if(0!=getProbabilityOfWord(key, testSpam1.length,testHam1.length)) {
+                    probOfAllWords.put(key, getProbabilityOfWord(key, testSpam1.length, testHam1.length));
+                };
             }
             for (String key : spamOccurrences.keySet()) {
-                probOfAllWords.put(key, getProbabilityOfWord(key,testSpam1.length,testHam1.length));
+                if(0!=getProbabilityOfWord(key, testSpam1.length,testHam1.length)) {
+                    probOfAllWords.put(key, getProbabilityOfWord(key, testSpam1.length, testHam1.length));
+                }
             }
     }
 

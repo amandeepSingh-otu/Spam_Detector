@@ -20,74 +20,49 @@ public class SpamResource {
 
 //    your SpamDetector Class responsible for all the SpamDetecting logic
     SpamDetector detector = new SpamDetector();
+    private List<TestFile> results=new ArrayList<>();
 
 
-    SpamResource(){
+    SpamResource() throws IOException {
 //        TODO: load resources, train and test to improve performance on the endpoint calls
         System.out.print("Training and testing the model, please wait");
 
-//      TODO: call  this.trainAndTest();
+//      TODO: call  this.trainAndTest()
+      this.results=trainAndTest();
 
 
     }
     // In the end delete it, fix getspamResults! using it to make testing esaiser
 
-    @GET
-    @Produces("text/string")
-    public String get() throws IOException {
-//       TODO: return the test results list of TestFile, return in a Response object
-        URL url =this.getClass().getClassLoader().getResource("/data");
-        File mainDirectory = null;
-        try {
-            assert url != null;
-            mainDirectory= new File(url.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        String p=(mainDirectory+"\\train\\ham");
-        File[] fileArrays=new File(p).listFiles();
-       ArrayList<String> wordsInFile=new ArrayList<>();
-
-            FileReader fileReader = null;
-            try {
-                fileReader = new FileReader(fileArrays[1]);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            String g="";
-       for(File file: fileArrays){
-            g=g+file.getName()+"\n";
-       };
-       return g;
-    }
 
     @GET
-    @Path("/it")
     @Produces("application/json")
     public Response getSpamResults() throws IOException {
 //       TODO: return the test results list of TestFile, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(TestingProb()).build();
+                entity(results).build();
 
     }
 
     @GET
     @Path("/accuracy")
     @Produces("application/json")
-    public Response getAccuracy() {
+    public Response getAccuracy() throws IOException {
 //      TODO: return the accuracy of the detector, return in a Response object
-
-        return null;
+        return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
+                .header("Content-Type","application/json").
+                entity(getAccuracyAndPrescision(results)[0]).build();
     }
 
     @GET
     @Path("/precision")
     @Produces("application/json")
-    public Response getPrecision() {
+    public Response getPrecision() throws IOException {
        //      TODO: return the precision of the detector, return in a Response object
-
-        return null;
+        return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
+                .header("Content-Type","application/json").
+                entity(getAccuracyAndPrescision(results)[1]).build();
     }
     public String TestingProb() throws JsonProcessingException {
         URL url =this.getClass().getClassLoader().getResource("/data");
@@ -126,12 +101,30 @@ public class SpamResource {
         return jsonArray;
     }
         //         This function basically calls the detector.trainAndTest with a given directory
-    private String returnFilesResponse() throws IOException {
-            List<TestFile> listOfFiles=trainAndTest();
+    private String returnFilesResponse(List<TestFile> results) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonArray = objectMapper.writeValueAsString(listOfFiles);
+        String jsonArray = objectMapper.writeValueAsString(results);
         return jsonArray;
     };
+    private double[] getAccuracyAndPrescision(List<TestFile> results) throws IOException {
+        double accuracy=0;
+        int truePositive=0;
+        int trueNegative=0;
+        int falsePositive=0;
+        for( TestFile file: results){
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Ham")){
+                truePositive+=1;
+            }
+            if(file.getSpamProbability()>0.5 && file.getActualClass().equals("Spam")){
+                trueNegative+=1;
+            }
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Spam")){
+                falsePositive+=1;
+            }
+        };
+        return new double[]{(double) (trueNegative + truePositive) / results.size(), (truePositive/(double) (falsePositive+truePositive))};
+    };
+
     private List<TestFile> trainAndTest() throws IOException {
         if (this.detector==null){
             this.detector = new SpamDetector();

@@ -2,6 +2,7 @@ package com.spamdetector.domain;
 
 import java.text.DecimalFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.ws.rs.Path;
 
 /**
  * This class represents a file from the testing data
@@ -26,10 +27,15 @@ public class TestFile {
     @JsonProperty("actualClass")
     private String actualClass;
 
+    @JsonProperty("spamProbRounded")
+    private double spamProbRounded;
+
     public TestFile(String filename, double spamProbability, String actualClass) {
+        this.spamProbRounded= (double) Math.round(spamProbability*100000)/100000;
         this.filename = filename;
         this.spamProbability = spamProbability;
         this.actualClass = actualClass;
+
     }
 
     /**
@@ -46,6 +52,7 @@ public class TestFile {
      * @return the actual/real class of the file
      */
     public String getActualClass() { return this.actualClass; }
+    public Double getSpamProbRounded(){return this.spamProbRounded;};
 
     public void setFilename(String value) { this.filename = value; }
     public void setSpamProbability(double value) { this.spamProbability = value; }
