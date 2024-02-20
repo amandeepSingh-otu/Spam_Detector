@@ -242,7 +242,7 @@ textarea {
   }
 
   p,
-  h2,
+  h2 ,
   h3 {
     orphans: 3;
     widows: 3;
@@ -253,4 +253,99 @@ textarea {
     page-break-after: avoid;
   }
 }
+
+
+/*Basic Website Styling */
+
+/*Header of the Page*/
+.nav-bar{
+  background-color: #1b4172;
+  color: #d86f4c;
+  margin: auto;
+  border-color: #1b4172;
+  border-style: solid;
+
+
+
+  h2{
+    padding-left: 10px;
+  }
+}
+
+body{
+  min-height: fit-content;
+}
+
+
+/* Whole Main Content Area Of the Page incl sidebar, body-sec, precision */
+.body-ref{
+  height:100vh;
+  background-color: #f1f1f1;
+}
+
+
+/*Side Navigation bar of the Page */
+.side-bar{
+  background-color: #eda88d;
+  font-weight: bold;
+  text-decoration: none;
+  color: #1b4172;
+
+  ul{
+    font-size: larger;
+    list-style: none;
+    text-decoration: none;
+    margin-top: 1vw;
+    padding: 2vw;
+  }
+}
+
+/* Center content of Page */
+.body-sec{
+  padding-left: 2vw;
+  background-color: #f1f1f1;
+}
+
+
+
+/*Precision Output*/
+
+.precision-div{
+  height: auto;
+  position: relative;
+
+  p{
+    font-size: larger;
+    font-weight: bolder;
+  }
+
+  padding-left: 10vw;
+  padding-top: 20vw;
+
+
+}
+
+
+
+
+
+
+/* Footer of the Page */
+
+footer{
+  background-color: #1b4172;
+  position: relative;
+  text-align: center;
+  color: #d86f4c;
+
+  width: 100vw;
+
+  border: solid transparent;
+
+
+}
+
+
+
+
 

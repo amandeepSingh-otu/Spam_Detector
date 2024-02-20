@@ -22,7 +22,7 @@
   <meta name="theme-color" content="#fafafa">
 </head>
 
-<body>
+<body id = "home">
 
   <!-- Add your site or application content here -->
   <nav class="nav-bar">
@@ -32,13 +32,14 @@
   </nav>
   <div class="body-ref" >
     <aside class="side-bar" id="sidebar">
-
-      <li id="Dashboard" onclick="loadBody()">
-        <a href="#">Dashboard</a>
-      </li>
-      <li id="About" onclick="loadAbout()">
-        <a href="#">About</a>
-      </li>
+      <ul>
+        <li id="Dashboard" onclick="loadBody()">
+          <a href="#">Dashboard</a>
+        </li>
+        <li id="About" onclick="loadAbout()">
+          <a href="#">About</a>
+        </li>
+      </ul>
 
     </aside>
     <div class="body-sec" id="body-sec">
@@ -69,10 +70,10 @@
         <div class="form">
           <form >
             <label >Accuracy:</label><br>
-            <output type="number" id="accuracy" name="accuracy"  ><br>
+            <output type="number" id="accuracy" name="accuracy"  ><br></output>
 
               <label >Precision:</label><br>
-              <output type="number" id="precision" name="precision" ><br>
+              <output type="number" id="precision" name="precision" ><br> </output>
           </form>
         </div>
 
