@@ -49,22 +49,29 @@ public class SpamResource {
     @Path("/accuracy")
     @Produces("application/json")
     public Response getAccuracy() throws IOException {
-//      TODO: return the accuracy of the detector, return in a Response object
+
+        //accuracy map converted to json object
+        JSONObject jsonObject = new JSONObject(calculateAccuracy());
+
+        //return the accuracy of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(getAccuracyAndPrescision(results)[0]).build();
-        //TODO: return map converted to json object
+                entity(jsonObject).build();
     }
 
     @GET
     @Path("/precision")
     @Produces("application/json")
     public Response getPrecision() throws IOException {
-       //      TODO: return the precision of the detector, return in a Response object
+
+        //precision map converted to json object
+        JSONObject jsonObject = new JSONObject(calculatePrecision());
+
+        //return the precision of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(getAccuracyAndPrescision(results)[1]).build();
-        //TODO: return map converted to json object
+                entity(jsonObject).build();
+
     }
     public String TestingProb() throws JsonProcessingException {
         URL url =this.getClass().getClassLoader().getResource("/data");
