@@ -53,6 +53,7 @@ public class SpamResource {
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
                 entity(getAccuracyAndPrescision(results)[0]).build();
+        //TODO: return map converted to json object
     }
 
     @GET
@@ -63,6 +64,7 @@ public class SpamResource {
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
                 entity(getAccuracyAndPrescision(results)[1]).build();
+        //TODO: return map converted to json object
     }
     public String TestingProb() throws JsonProcessingException {
         URL url =this.getClass().getClassLoader().getResource("/data");
@@ -106,6 +108,8 @@ public class SpamResource {
         String jsonArray = objectMapper.writeValueAsString(results);
         return jsonArray;
     };
+
+    
     private double[] getAccuracyAndPrescision(List<TestFile> results) throws IOException {
         double accuracy=0;
         int truePositive=0;
@@ -122,6 +126,7 @@ public class SpamResource {
                 falsePositive+=1;
             }
         };
+        //TODO: return map object and break into two functions
         return new double[]{(double) (trueNegative + truePositive) / results.size(), (truePositive/(double) (falsePositive+truePositive))};
     };
 

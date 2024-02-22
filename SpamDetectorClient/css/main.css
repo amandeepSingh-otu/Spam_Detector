@@ -260,11 +260,11 @@ textarea {
 /*Header of the Page*/
 .nav-bar{
   background-color: #1b4172;
-  color: #d86f4c;
+  color: #f1f1f1;
   margin: auto;
   border-color: #1b4172;
   border-style: solid;
-
+  font-family: "Helvetica Neue";
 
 
   h2{
@@ -297,11 +297,17 @@ body{
     text-decoration: none;
     margin-top: 1vw;
     padding: 2vw;
+    li
+    {
+      text-decoration: none;
+    }
   }
 }
 
 /* Center content of Page */
 .body-sec{
+  color: #1b4172;
+  font-family: Helvetica;
   padding-left: 2vw;
   background-color: #f1f1f1;
 }
@@ -336,13 +342,22 @@ footer{
   background-color: #1b4172;
   position: relative;
   text-align: center;
-  color: #d86f4c;
+  color: #f1f1f1;
 
   width: 100vw;
 
   border: solid transparent;
 
 
+}
+
+table, th, td {
+  border: 0.1vw solid black;
+  border-collapse: separate;
+}
+
+.row{
+  flex-direction: row;
 }
 
 
