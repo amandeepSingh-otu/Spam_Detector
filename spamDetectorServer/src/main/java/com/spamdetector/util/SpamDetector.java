@@ -140,8 +140,8 @@ public class SpamDetector {
     public List<TestFile> trainAndTest(File mainDirectory) throws IOException {
 //        TODO: main method of loading the directories and files, training and testing the model
         train(mainDirectory);
-        ArrayList<TestFile> help= test(mainDirectory);
-        return help ;
+        ArrayList<TestFile> results= test(mainDirectory);
+        return results ;
     }
     public void train(File mainDirectory) throws IOException {
         String pathTrainHam = mainDirectory + "\\train\\ham";

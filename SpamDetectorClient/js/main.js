@@ -4,8 +4,6 @@ function loadAbout() {
   document.getElementById("body-sec").innerHTML='<object type="text/html" data="about.html" ' +
     'width="100%" height="100%"></object>';
 
-
-
 }
 function loadBody(){
   document.getElementById("body-sec").innerHTML = divbody;
