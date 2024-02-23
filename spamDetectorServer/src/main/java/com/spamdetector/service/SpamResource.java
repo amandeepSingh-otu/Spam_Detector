@@ -49,20 +49,29 @@ public class SpamResource {
     @Path("/accuracy")
     @Produces("application/json")
     public Response getAccuracy() throws IOException {
-//      TODO: return the accuracy of the detector, return in a Response object
+
+        //accuracy map converted to json object
+        JSONObject jsonObject = new JSONObject(calculateAccuracy());
+
+        //return the accuracy of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(getAccuracyAndPrescision(results)[0]).build();
+                entity(jsonObject).build();
     }
 
     @GET
     @Path("/precision")
     @Produces("application/json")
     public Response getPrecision() throws IOException {
-       //      TODO: return the precision of the detector, return in a Response object
+
+        //precision map converted to json object
+        JSONObject jsonObject = new JSONObject(calculatePrecision());
+
+        //return the precision of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(getAccuracyAndPrescision(results)[1]).build();
+                entity(jsonObject).build();
+
     }
     public String TestingProb() throws JsonProcessingException {
         URL url =this.getClass().getClassLoader().getResource("/data");
@@ -106,6 +115,9 @@ public class SpamResource {
         String jsonArray = objectMapper.writeValueAsString(results);
         return jsonArray;
     };
+
+   //Previous Working Function split into calculateAccuracy() and calculatePrecision()
+    /*
     private double[] getAccuracyAndPrescision(List<TestFile> results) throws IOException {
         double accuracy=0;
         int truePositive=0;
@@ -124,6 +136,55 @@ public class SpamResource {
         };
         return new double[]{(double) (trueNegative + truePositive) / results.size(), (truePositive/(double) (falsePositive+truePositive))};
     };
+    */
+
+
+    //Calculates accuracy and returns a Map object with key string "accuracy" and value of calculated accuracy
+    private Map<String, double> calculateAccuracy(List<TestFile> results) throws IOException {
+        double accuracy=0;
+        int truePositive=0;
+        int trueNegative=0;
+        int falsePositive=0;
+        for( TestFile file: results){
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Ham")){
+                truePositive+=1;
+            }
+            if(file.getSpamProbability()>0.5 && file.getActualClass().equals("Spam")){
+                trueNegative+=1;
+            }
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Spam")){
+                falsePositive+=1;
+            }
+        };
+
+        Map<String, double> map = new map<>();
+        map.put("accuracy" , (double) (trueNegative + truePositive) / results.size() );
+        return map;
+    }
+
+    //Calculates precision and returns a Map object with key string "precision" and value of calculated precision
+    private Map<String Accuracy, Double Value> calculatePrecision(List<TestFile> results) throws IOException {
+        double accuracy=0;
+        int truePositive=0;
+        int trueNegative=0;
+        int falsePositive=0;
+        for( TestFile file: results){
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Ham")){
+                truePositive+=1;
+            }
+            if(file.getSpamProbability()>0.5 && file.getActualClass().equals("Spam")){
+                trueNegative+=1;
+            }
+            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Spam")){
+                falsePositive+=1;
+            }
+        };
+
+        Map<String, double> map = new map<>();
+        map.put("precision" , (truePositive/((double) (falsePositive+truePositive))) );
+        return map;
+
+    }
 
     private List<TestFile> trainAndTest() throws IOException {
         if (this.detector==null){
