@@ -14,6 +14,7 @@ import java.util.*;
 
 import jakarta.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 @Path("/spam")
 public class SpamResource {
@@ -49,28 +50,20 @@ public class SpamResource {
     @Path("/accuracy")
     @Produces("application/json")
     public Response getAccuracy() throws IOException {
-
-        //accuracy map converted to json object
-        JSONObject jsonObject = new JSONObject(calculateAccuracy());
-
         //return the accuracy of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(jsonObject).build();
+                entity(calculatePrecision(results)).build();
     }
 
     @GET
     @Path("/precision")
     @Produces("application/json")
     public Response getPrecision() throws IOException {
-
-        //precision map converted to json object
-        JSONObject jsonObject = new JSONObject(calculatePrecision());
-
         //return the precision of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(jsonObject).build();
+                entity(calculateAccuracy(results)).build();
 
     }
     public String TestingProb() throws JsonProcessingException {
@@ -88,13 +81,13 @@ public class SpamResource {
         }
         TreeMap<String, Double> p=this.detector.gettestingProb();
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonArray = objectMapper.writeValueAsString(p);
-        return jsonArray;
+        return objectMapper.writeValueAsString(p);
     };
     public String TestingMaps() throws JsonProcessingException {
         URL url =this.getClass().getClassLoader().getResource("/data");
         File mainDirectory = null;
         try {
+            assert url != null;
             mainDirectory= new File(url.toURI());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -106,14 +99,12 @@ public class SpamResource {
         }
         ArrayList<TreeMap<String,Integer>> listOfFiles=this.detector.getWordsInFile();
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonArray = objectMapper.writeValueAsString(listOfFiles);
-        return jsonArray;
+        return objectMapper.writeValueAsString(listOfFiles);
     }
         //         This function basically calls the detector.trainAndTest with a given directory
     private String returnFilesResponse(List<TestFile> results) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonArray = objectMapper.writeValueAsString(results);
-        return jsonArray;
+        return objectMapper.writeValueAsString(results);
     };
 
    //Previous Working Function split into calculateAccuracy() and calculatePrecision()
@@ -140,7 +131,7 @@ public class SpamResource {
 
 
     //Calculates accuracy and returns a Map object with key string "accuracy" and value of calculated accuracy
-    private Map<String, double> calculateAccuracy(List<TestFile> results) throws IOException {
+    private Map<String, Double> calculateAccuracy(List<TestFile> results) throws IOException {
         double accuracy=0;
         int truePositive=0;
         int trueNegative=0;
@@ -157,14 +148,13 @@ public class SpamResource {
             }
         };
 
-        Map<String, double> map = new map<>();
+        TreeMap<String, Double> map = new TreeMap<>();
         map.put("accuracy" , (double) (trueNegative + truePositive) / results.size() );
         return map;
     }
 
     //Calculates precision and returns a Map object with key string "precision" and value of calculated precision
-    private Map<String Accuracy, Double Value> calculatePrecision(List<TestFile> results) throws IOException {
-        double accuracy=0;
+    private Map<String, Double> calculatePrecision(List<TestFile> results) throws IOException {
         int truePositive=0;
         int trueNegative=0;
         int falsePositive=0;
@@ -180,7 +170,7 @@ public class SpamResource {
             }
         };
 
-        Map<String, double> map = new map<>();
+        TreeMap<String, Double> map = new TreeMap<>();
         map.put("precision" , (truePositive/((double) (falsePositive+truePositive))) );
         return map;
 
@@ -195,6 +185,7 @@ public class SpamResource {
         URL url =this.getClass().getClassLoader().getResource("/data");
         File mainDirectory = null;
         try {
+            assert url != null;
             mainDirectory= new File(url.toURI());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
