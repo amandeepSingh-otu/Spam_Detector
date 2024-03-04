@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/main.css">
 
   <meta name="theme-color" content="#fafafa">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body id = "home">
@@ -33,11 +34,15 @@
   <div class="body-ref" >
     <aside class="side-bar" id="sidebar">
       <ul>
-        <li id="Dashboard" onclick="loadBody()">
-          <a href="#">Dashboard</a>
+        <li id="Dashboard" onclick="loadBody()" class="side-bar-links" >
+          <img src="img/square.png">
+          <a href="#" >Dashboard</a>
+
         </li>
-        <li id="About" onclick="loadAbout()">
+        <li id="About" onclick="loadAbout()" class="side-bar-links">
+          <img src="img/profile.png">
           <a href="#">About</a>
+
         </li>
       </ul>
 
@@ -69,10 +74,15 @@
         <div class="form">
           <form >
             <label >Accuracy:</label><br>
-            <output type="number" id="accuracy" name="accuracy"  ><br></output>
+            <output type="number" id="accuracy" name="accuracy"  class="pie"><br></output>
+            <div class="bar" id="accuracyPie" ></div>
+
+
+            <br>
 
               <label >Precision:</label><br>
               <output type="number" id="precision" name="precision" ><br> </output>
+            <div class="bar" id="precisionPie" ></div>
           </form>
         </div>
 

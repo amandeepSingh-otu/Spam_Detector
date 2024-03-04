@@ -131,7 +131,7 @@ public class SpamResource {
 
 
     //Calculates accuracy and returns a Map object with key string "accuracy" and value of calculated accuracy
-    private Map<String, Double> calculateAccuracy(List<TestFile> results) throws IOException {
+    private TreeMap<String, Double> calculateAccuracy(List<TestFile> results) throws IOException {
         double accuracy=0;
         int truePositive=0;
         int trueNegative=0;
@@ -154,7 +154,7 @@ public class SpamResource {
     }
 
     //Calculates precision and returns a Map object with key string "precision" and value of calculated precision
-    private Map<String, Double> calculatePrecision(List<TestFile> results) throws IOException {
+    private TreeMap<String, Double> calculatePrecision(List<TestFile> results) throws IOException {
         int truePositive=0;
         int trueNegative=0;
         int falsePositive=0;
