@@ -4,6 +4,8 @@ let acuarcyOuput;
 let precisionOutput;
 let accuarcy;
 let precision;
+let tableBody;
+let tableData ;
 function loadAbout() {
   document.getElementById("body-sec").innerHTML='<object type="text/html" data="about.html" ' +
     'width="100%" height="100%"></object>';
@@ -15,6 +17,7 @@ function loadBody(){
   document.getElementById("precision").innerHTML = precisionOutput.value;
   drawChart(accuarcy,"accuracyPie");
   drawChart(precision,"precisionPie");
+  populateSpamTable(tableData);
 
 }
 function requestAccuarcy(){
@@ -88,7 +91,9 @@ function fetchSpamData() {
 }
 
 function populateSpamTable(data) {
-  const tableBody = document.getElementById("table-body-ref");
+  tableData = data;
+
+  tableBody = document.getElementById("table-body-ref");
   tableBody.innerHTML = ""; // Clear existing table data if any
 
   data.forEach(item => {

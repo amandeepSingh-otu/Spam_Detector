@@ -375,8 +375,8 @@ a:hover {
 
   transition-delay: 50ms;
 
-  text-decoration-color: blue;
-  background-color: blue;
+  text-decoration-color: #1b4172;
+  background-color: #1b4172;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
@@ -386,8 +386,8 @@ a:focus {
   color: white;
 
 
-  text-decoration-color: blue;
-  background-color: blue;
+  text-decoration-color: #1b4172;
+  background-color: #1b4172;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
@@ -425,9 +425,9 @@ img{
 
 }
 
-
-
-
-
-
-
+table{
+  overflow-y:scroll;
+  height:400px;
+  display:block;
+  width: fit-content;
+}
