@@ -318,15 +318,17 @@ body{
 
 .precision-div{
   height: auto;
-  position: relative;
+  flex: 1;
+
 
   p{
     font-size: larger;
     font-weight: bolder;
   }
+  margin-left: 10px;
 
-  padding-left: 10vw;
-  padding-top: 20vw;
+
+
 
 
 }
@@ -361,39 +363,68 @@ table, th, td {
 }
 a{
   color: black;
+
   text-decoration: none;
   text-decoration-color: white;
+  padding: 7px;
+  width: 110px;
 }
 
 a:hover {
-  color: blue;
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
+  color: white;
+
+  transition-delay: 50ms;
+
   text-decoration-color: blue;
+  background-color: blue;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
 }
 a:focus {
-  color: blue;
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
+  outline: none;
+  color: white;
+
+
   text-decoration-color: blue;
+  background-color: blue;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
 
 }
 img{
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
 }
 .side-bar-links{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  align-content: end;
+  gap: 8px;
 }
 .bar {
   height: 50px;
-  width: 50x;
+  width: 50px;
+  margin-left: 50px;
+  border: solid;
+  border-radius: 100%;
+  border: white;
+  cursor: pointer;
+
 
 
 }
+.pie-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px;
+
+}
+
 
 
 
