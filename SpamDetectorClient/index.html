@@ -36,7 +36,7 @@
       <ul>
         <li id="Dashboard" onclick="loadBody()" class="side-bar-links" >
           <img src="img/square.png">
-          <a href="#" >Dashboard</a>
+          <a href="#" autofocus>Dashboard</a>
 
         </li>
         <li id="About" onclick="loadAbout()" class="side-bar-links">
@@ -73,16 +73,25 @@
         <p>Performance of the model</p>
         <div class="form">
           <form >
-            <label >Accuracy:</label><br>
-            <output type="number" id="accuracy" name="accuracy"  class="pie"><br></output>
-            <div class="bar" id="accuracyPie" ></div>
+            <div class="pie-div">
+              <div class="pie-sec">
+                <label >Accuracy:</label><br>
+                <output type="number" id="accuracy" name="accuracy"  class="pie"><br></output>
+              </div>
+              <div class="bar" id="accuracyPie" ></div><br>
+            </div>
+            <div class="pie-div">
+              <div class="pie-sec">
+                <label >Precision:</label><br>
+                <output type="number" id="precision" name="precision" ><br> </output>
+              </div>
+              <div class="bar" id="precisionPie" ></div>
+            </div>
 
 
-            <br>
 
-              <label >Precision:</label><br>
-              <output type="number" id="precision" name="precision" ><br> </output>
-            <div class="bar" id="precisionPie" ></div>
+
+
           </form>
         </div>
 
