@@ -16,7 +16,6 @@ function loadBody(){
   drawChart(accuarcy,"accuracyPie");
   drawChart(precision,"precisionPie");
 
-
 }
 function requestAccuarcy(){
   let apiUrl = "http://localhost:8080/spamDetector-1.0/api/spam/accuracy" ;
@@ -74,10 +73,49 @@ function loadAcuarcy(response){
 
 
 }
+
+function fetchSpamData() {
+  let apiUrl = "http://localhost:8080/spamDetector-1.0/api/spam/";
+  fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => populateSpamTable(data))
+    .catch(error => console.error("Failed to fetch spam data: ", error));
+}
+
+function populateSpamTable(data) {
+  const tableBody = document.getElementById("table-body-ref");
+  tableBody.innerHTML = ""; // Clear existing table data if any
+
+  data.forEach(item => {
+    const row = document.createElement("tr");
+
+    const fileCell = document.createElement("td");
+    fileCell.textContent = item.filename;
+    row.appendChild(fileCell);
+
+    const spamProbCell = document.createElement("td");
+    spamProbCell.textContent = item.spamProbRounded.toFixed(2);
+    row.appendChild(spamProbCell);
+
+    const classCell = document.createElement("td");
+    classCell.textContent = item.actualClass;
+    row.appendChild(classCell);
+
+    tableBody.appendChild(row);
+  });
+}
+
+
 (function () {
  // requestDataFromServer(apiUrl);
   requestAccuarcy();
   requestPreciosn();
+  fetchSpamData();
 
 })();
 google.charts.load('current', {'packages':['corechart']});
