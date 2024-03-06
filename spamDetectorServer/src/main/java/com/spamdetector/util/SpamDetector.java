@@ -40,15 +40,17 @@ public class SpamDetector {
                 if(isHam){
                     //check if those are one of common words
                     //add it into ham
-                    //if(Collections.binarySearch(commonWords,word)<0){
-                        hamOccurrences.put(word,null==hamOccurrences.get(word)?1: hamOccurrences.get(word)+1);
+                    if(Collections.binarySearch(commonWords,word)<0) {
+                        hamOccurrences.put(word, null == hamOccurrences.get(word) ? 1 : hamOccurrences.get(word) + 1);
+                    };
 
 
                 }
                 else{
                     //add it to the spam and check if it is one of common or meaningless words
-                    //if(Collections.binarySearch(commonWords,word)<0){
-                        spamOccurrences.put(word,null== spamOccurrences.get(word)?1: spamOccurrences.get(word)+1);
+                    if(Collections.binarySearch(commonWords,word)<0) {
+                        spamOccurrences.put(word, null == spamOccurrences.get(word) ? 1 : spamOccurrences.get(word) + 1);
+                    }
                 }
             }
         }

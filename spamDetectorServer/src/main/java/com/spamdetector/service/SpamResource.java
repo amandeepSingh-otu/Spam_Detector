@@ -101,33 +101,11 @@ public class SpamResource {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(listOfFiles);
     }
-        //         This function basically calls the detector.trainAndTest with a given directory
+        // This function basically calls the detector.trainAndTest with a given directory
     private String returnFilesResponse(List<TestFile> results) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(results);
     };
-
-   //Previous Working Function split into calculateAccuracy() and calculatePrecision()
-    /*
-    private double[] getAccuracyAndPrescision(List<TestFile> results) throws IOException {
-        double accuracy=0;
-        int truePositive=0;
-        int trueNegative=0;
-        int falsePositive=0;
-        for( TestFile file: results){
-            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Ham")){
-                truePositive+=1;
-            }
-            if(file.getSpamProbability()>0.5 && file.getActualClass().equals("Spam")){
-                trueNegative+=1;
-            }
-            if(file.getSpamProbability()<0.5 && file.getActualClass().equals("Spam")){
-                falsePositive+=1;
-            }
-        };
-        return new double[]{(double) (trueNegative + truePositive) / results.size(), (truePositive/(double) (falsePositive+truePositive))};
-    };
-    */
 
 
     //Calculates accuracy and returns a Map object with key string "accuracy" and value of calculated accuracy
@@ -176,6 +154,7 @@ public class SpamResource {
 
     }
 
+    // This function get the URL of our data and teh call testAndTrain from detetcor storing results in the result
     private List<TestFile> trainAndTest() throws IOException {
         if (this.detector==null){
             this.detector = new SpamDetector();
