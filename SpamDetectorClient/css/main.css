@@ -405,7 +405,7 @@ img{
   align-content: end;
   gap: 8px;
 }
-.bar {
+.chart {
   height: 50px;
   width: 50px;
   margin-left: 50px;
@@ -415,13 +415,13 @@ img{
   cursor: pointer;
 
 
-
 }
 .pie-div{
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 12px;
+
 
 }
 
