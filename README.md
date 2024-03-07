@@ -22,6 +22,24 @@ fetch data from api called <a href>ka</a> to show the files in table formats, ge
 <ol> 
 <h3 style="color: #087a08">Model Improvements:</h3>
 <h3 style="color: #087a08"> User Interface Improvements:</h3>
+  <ul>
+    <li>
+      <a>Use the :focus pseudo-class to the links that change the content of the body to highlight which page the body is in, 
+        set a background color, and a border, and change the font color.   </a>
+    </li>
+    <li>
+      <a>
+        Use the :hover pseudo-class to create an animation for the links that change the content of the body section,
+        it has all the properties of the focus pseudo-class but with a wider border to differentiate them, also it has a transition property so
+        that it performs all changes in 0.2s.
+      </a>
+    </li>
+    <li>
+      <a>
+        Use JavaScript and the Google Chart library to create two pie charts and visualize the accuracy and precision of the model
+      </a>
+    </li>
+  </ul>
 <h3 style="color: #087a08"> Data: </h3>
 </ol>
 <h2 style="color: #c2174f">How to run:</h2>
