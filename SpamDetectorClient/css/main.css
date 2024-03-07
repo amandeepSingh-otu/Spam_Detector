@@ -381,6 +381,7 @@ a:hover {
   border-style: solid;
   border-color: black;
   transition: all 0.2s ease;
+
 }
 a:focus {
   outline: none;
