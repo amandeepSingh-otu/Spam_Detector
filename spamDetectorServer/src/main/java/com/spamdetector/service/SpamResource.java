@@ -89,7 +89,7 @@ public class SpamResource {
         };
 
         TreeMap<String, Double> map = new TreeMap<>();
-        map.put("accuracy" , (double) (trueNegative + truePositive) / results.size() );
+        map.put("value" , (double) (trueNegative + truePositive) / results.size() );
         return map;
     }
 
@@ -111,7 +111,7 @@ public class SpamResource {
         };
 
         TreeMap<String, Double> map = new TreeMap<>();
-        map.put("precision" , (truePositive/((double) (falsePositive+truePositive))) );
+        map.put("value" , (truePositive/((double) (falsePositive+truePositive))) );
         return map;
 
     }
