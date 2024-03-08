@@ -69,6 +69,10 @@
 
 - ### User Interface Improvements
 
+    Apply the :focus pseudo-class to the links that alter the body's content, emphasizing the current page by setting a background color, adding a border, and adjusting the font color.
+    Implement the :hover pseudo-class to generate an animation for links influencing the body content. This pseudo-class mirrors the properties of the :focus pseudo-class but features a wider border for distinction. Additionally, introduce a transition property to ensure a smooth transition with all changes occurring in 0.2 seconds.
+    Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model.
+
 - ### Data
     To enhance the accuracy of our probability estimates, we merged the contents of 'ham1' and 'ham2' directories into a single 'ham' dataset. 
 This consolidation allowed us to incorporate a broader range of legitimate email vocabulary, leading to more refined probability calculations.
@@ -94,3 +98,5 @@ By combining these datasets, our model gained a deeper understanding of typical 
 
 
 ## Other Resources
+ Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model. The link for this library is in the head section of the `index.html` file and needs to be loaded to the project in order to see the charts, to do this go to the `index.html` file and IntelliJ will tell you to download the library.
+
