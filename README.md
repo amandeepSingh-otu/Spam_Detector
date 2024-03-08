@@ -1,48 +1,104 @@
-# Assignment 01 - Spam Detector (Instructions)
-CSCI 2020U: Software Systems Development and Integration
+# Spam Detector
+![img.png](FrontEndPicsForReadME/FrontEndImage1.png)![img_1.png](FrontEndPicsForReadME/img_1.png)
+## Project Information
+- **Course**: CSCI 2020U: Software Systems Development and Integration
+- **Components**:
+    - SpamDetectorClient: HTML, CSS, and JavaScript
+    - SpamDetectorServer: Java and JAX-RS
 
-This is the template for your Assignment 01.
+- ### Client Side
+  This project leverages JavaScript to fetch data from a server-side APIs, subsequently displaying the retrieved data in both tabular and chart formats on the client side.
+The data is dynamically loaded into an HTML table for easy visualization and the accuracy and precision is displayed graphically using charts, facilitating better comprehension of the dataset's trends and insights.
 
-## Overview
-You have become frustrated with all the advertisements in your inbox. You resolve to create a spam detector to filter out the spam. The spam detector will use a dataset of E-Mails (spam or otherwise) to train your program to recognize whether or not new E-Mails are spam. The program will use a unigram approach [1], where each word is counted and associated with whether or not the message is spam. Your program will calculate probabilities based on each word’s frequency [2]. Luckily, you have not emptied your spam folder or inbox in quite a while, so you have many samples to use to train your system. 
+- ### Server Side
+    The whole process of server side can be explained as following:
+  - ### Training Phase
 
-- Check `Canvas/Assingments/Assignment 01` for detailed instructions.
+    - #### Data Collection
+      - We Read all files in the training/ham and training/spam folders, each containing ham and spam files.
 
-### SpamDetectorServer - Endpoints
+    - #### Word Frequency Calculation
+      - We Counted how many files contain each word which appear in either spam of ham.
+      - We Created two frequency Tree maps:
+          - `HamOccurances`: Map of words to the number of files containing each word in the ham folder.
+          - `spamOccurances`: Map of words to the number of files containing each word in the spam folder.
 
-**Listing all the test files**
+    - #### Calculate Probabilities
+      - We Calculated probabilities:
+          - `Pr(S|Wi)`: Probability that a file is spam given that it contains word Wi.
+          - `Pr(Wi|S)`: Probability that word Wi appears in a spam file.
+          - `Pr(Wi|H)`: Probability that word Wi appears in a ham file.
+      - We Stored these probabilities in a Treemap `probOfAllWords` indexed by the word Wi.
 
-This will return a `application/json` content type.
+  - ### Testing Phase
+
+    - ### Data Examination
+      - We read each file in the test/ham and test/spam folders.
+
+    - ### Word Probability Calculation
+      - For each word in the file, We used the probabilities from the training phase to calculate:
+          - Ham and spam probabilities for each word.
+          - Probability that the file is spam based on the words it contains.
+
+### Evaluation
+- We compared the calculated probability of the file being spam to a threshold.
+- Classified the file as spam or ham based on whether the probability exceeds the threshold.
+- As we already knew the spam/ham class of emails being tested, we measured the `accuracy` and `precision` which are and respectively.
+
+### Endpoints
 - `http://localhost:8080/spamDetector-1.0/api/spam`
-Here's an example illustrating what a sample response might resemble:
-```
-[{"spamProbRounded":"0.00000","file":"00006.654c4ec7c059531accf388a807064363","spamProbability":5.901245803391957E-62,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00007.2e086b13730b68a21ee715db145522b9","spamProbability":2.800348071907053E-12,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00008.6b73027e1e56131377941ff1db17ff12","spamProbability":8.66861037294167E-14,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00009.13c349859b09264fa131872ed4fb6e4e","spamProbability":6.947265471550557E-12,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00010.d1b4dbbad797c5c0537c5a0670c373fd","spamProbability":1.8814467288977145E-7,"actualClass":"Ham"},{"spamProbRounded":"0.00039","file":"00011.bc1aa4dca14300a8eec8b7658e568f29","spamProbability":3.892844289937937E-4,"actualClass":"Ham"}]
-```
-
-**Calculate and get accuracy**
-This will return a `application/json` content type.
 - `http://localhost:8080/spamDetector-1.0/api/spam/accuracy`
-Here's an example illustrating what a sample response might resemble:
-```
-{"val": 0.87564}
-```
-
-**Calculate and get precision**
-This will return a `application/json` content type.
 - `http://localhost:8080/spamDetector-1.0/api/spam/precision`
-Here's an example illustrating what a sample response might resemble:
-```
-{"val": 0.56484}
-```
-### SpamDetectorServer - SpamDetector class
+## Group Members
+- Amandeep Singh
+- Simon Gotera Vargas
+- Josiah Jehoiakim Yap
+- Tyler Valentini
 
-Most of your programming will be in the `SpamDetector` class. This class will be responsible for reading the testing and training data files, training, and testing the model.
+## Improvements
 
->1. Feel free to create other helper classes as you see fit.
-> 
->2. You are not expected to get the exact same values as the ones shown in the samples.
+- ### Model Improvements
+  In our pursuit of refining the model's spam detection capabilities, 
+ we implemented several strategic enhancements. Foremost among these was a shift in our approach to processing email content.
+ Instead of treating emails as mere bag of words, we began prioritizing the extraction of information from subject lines. Recognizing subject lines as pivotal components containing 
+ summaries of email content, we leveraged this insight to capture crucial data from the outset, potentially enhancing our model's 
+ ability to discern spam from legitimate messages. Furthermore, we embarked on a meticulous curation process to optimize the selection of words for analysis. This involved the deliberate 
+ exclusion of commonplace linguistic elements, such as pronouns and articles, which typically contribute little semantic value.
+ By eliminating these words from consideration, we aimed to refine the model's feature set, 
+ enabling it to focus more effectively on identifying words
+ patterns indicative of spam content. This refinement not only served to mitigate noise within the dataset but also improved the precision and reliability of our probability estimates, thereby enriching the model's ability to accurately classify emails.
 
-### References 
-[1] https://en.wikipedia.org/wiki/Bag-of-words_model 
+- ### User Interface Improvements
+  To enhance accessibility and interactivity, the project applies the :focus pseudo-class to links altering the body's content. 
+This emphasizes the current page by setting a background color, adding a border, and adjusting the font color for improved visual clarity. 
+Additionally, the :hover pseudo-class introduces animations for links affecting the body content, mirroring the properties of :focus but with a wider border for distinction.
+A transition property ensures smooth transitions, with changes occurring over 0.2 seconds. Leveraging the Google Chart library and JavaScript, the project creates two pie charts to visualize the precision and accuracy of the model,
+enhancing data representation and user engagement. To clarify, the table data is made scrollable, ensuring that users can navigate through large datasets with ease, facilitating efficient data exploration and analysis.
 
-[2] https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering 
+- ### Data
+    To enhance the accuracy of our probability estimates, we merged the contents of 'ham1' and 'ham2' directories into a single 'ham' dataset. 
+This consolidation allowed us to incorporate a broader range of legitimate email vocabulary, leading to more refined probability calculations.
+By combining these datasets, our model gained a deeper understanding of typical language usage, thereby improving its ability to discern between spam and non-spam content with greater precision.
+
+## How to Run the Project Locally
+
+- ####  Download GlassFish Server
+  - Download and install GlassFish Server from the official website or a trusted source.
+
+- #### Open Project in IntelliJ
+  - Open IntelliJ IDEA and load the project containing the server-side code.
+
+- ####  Edit configuration
+  - In IntelliJ, go to file -> edit configuration and set up maven project to deploy WAR exploded locally.
+
+- #### Deploy Locally
+  - Deploy the generated WAR file to GlassFish Server by clicking on run project button on top.
+
+- #### Access Through Client Side Files
+  - Ensure that the client-side files (HTML, CSS, JavaScript) are configured to make requests to the local server.
+  - Run the client-side files in a web browser to interact with the application. Make any necessary adjustments to URLs or endpoints to connect to the local server.
+
+
+## Other Resources
+  The project utilizes the Google Chart library for creating pie charts to visualize precision and accuracy data.
+

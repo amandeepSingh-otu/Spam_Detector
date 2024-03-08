@@ -347,3 +347,40 @@ template {
 [hidden] {
   display: none;
 }
+
+/**
+  nav
+ */
+
+.nav-bar{
+  background-color: blue;
+  border-bottom: solid;
+  border-bottom-color: lightgray;
+  border-bottom-width:1px ;
+
+}
+
+.body-ref {
+  display: flex;
+  flex-direction: row;
+
+}
+.side-bar{
+  background-color: orange;
+  width: 180px;
+  height: auto;
+  border-right: solid;
+  border-right-color: gray;
+  border-right-width:1px ;
+}
+.analysis-sec{
+  width: 800px;
+
+
+}
+.body-sec{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: fit-content;
+}

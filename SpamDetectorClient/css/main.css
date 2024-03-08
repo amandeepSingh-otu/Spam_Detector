@@ -242,7 +242,7 @@ textarea {
   }
 
   p,
-  h2,
+  h2 ,
   h3 {
     orphans: 3;
     widows: 3;
@@ -254,3 +254,182 @@ textarea {
   }
 }
 
+
+/*Basic Website Styling */
+
+/*Header of the Page*/
+.nav-bar{
+  background-color: #1b4172;
+  color: #f1f1f1;
+  margin: auto;
+  border-color: #1b4172;
+  border-style: solid;
+  font-family: "Helvetica Neue";
+
+
+  h2{
+    padding-left: 10px;
+  }
+}
+
+body{
+  min-height: fit-content;
+}
+
+
+/* Whole Main Content Area Of the Page incl sidebar, body-sec, precision */
+.body-ref{
+  height:100vh;
+  background-color: #f1f1f1;
+}
+
+
+/*Side Navigation bar of the Page */
+.side-bar{
+  background-color: #eda88d;
+  font-weight: bold;
+  text-decoration: none;
+  color: #1b4172;
+
+  ul{
+    font-size: larger;
+    list-style: none;
+    text-decoration: none;
+    margin-top: 1vw;
+    padding: 2vw;
+    li
+    {
+      text-decoration: none;
+    }
+  }
+}
+
+/* Center content of Page */
+.body-sec{
+  color: #1b4172;
+  font-family: Helvetica;
+  padding-left: 2vw;
+  background-color: #f1f1f1;
+}
+
+
+
+/*Precision Output*/
+
+.precision-div{
+  height: auto;
+  flex: 1;
+
+
+  p{
+    font-size: larger;
+    font-weight: bolder;
+  }
+  margin-left: 10px;
+
+
+
+
+
+}
+
+
+
+
+
+
+/* Footer of the Page */
+
+footer{
+  background-color: #1b4172;
+  position: relative;
+  text-align: center;
+  color: #f1f1f1;
+
+  width: 100vw;
+
+  border: solid transparent;
+
+
+}
+
+table, th, td {
+  border: 0.1vw solid black;
+  border-collapse: separate;
+}
+
+.row{
+  flex-direction: row;
+}
+a{
+  color: black;
+
+  text-decoration: none;
+  text-decoration-color: white;
+  padding: 7px;
+  width: 110px;
+}
+
+a:hover {
+  color: white;
+
+
+
+  text-decoration-color: #1b4172;
+  background-color: #1b4172;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  transition: all 0.2s ease;
+
+}
+a:focus {
+  outline: none;
+  color: white;
+
+
+  text-decoration-color: #1b4172;
+  background-color: #1b4172;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+
+}
+img{
+  height: 25px;
+  width: 25px;
+}
+.side-bar-links{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: end;
+  gap: 8px;
+}
+.chart {
+  height: 50px;
+  width: 50px;
+  margin-left: 50px;
+  border: solid;
+  border-radius: 100%;
+  border: white;
+  cursor: pointer;
+
+
+}
+.pie-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px;
+
+
+}
+
+table{
+  overflow-y:scroll;
+  height:400px;
+  display:block;
+  width: fit-content;
+}
