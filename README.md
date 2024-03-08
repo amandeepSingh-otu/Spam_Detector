@@ -7,7 +7,8 @@
     - SpamDetectorServer: Java and JAX-RS
 
 - ### Client Side
-    The client side fetches data from an API called "ka" to display files in table formats and obtain accuracy and precision using different APIs.
+  This project leverages JavaScript to fetch data from a server-side APIs, subsequently displaying the retrieved data in both tabular and chart formats on the client side.
+The data is dynamically loaded into an HTML table for easy visualization and the accuracy and precision is displayed graphically using charts, facilitating better comprehension of the dataset's trends and insights.
 
 - ### Server Side
     The whole process of server side can be explained as following:
@@ -68,10 +69,11 @@
  patterns indicative of spam content. This refinement not only served to mitigate noise within the dataset but also improved the precision and reliability of our probability estimates, thereby enriching the model's ability to accurately classify emails.
 
 - ### User Interface Improvements
-
-    Apply the :focus pseudo-class to the links that alter the body's content, emphasizing the current page by setting a background color, adding a border, and adjusting the font color.
-    Implement the :hover pseudo-class to generate an animation for links influencing the body content. This pseudo-class mirrors the properties of the :focus pseudo-class but features a wider border for distinction. Additionally, introduce a transition property to ensure a smooth transition with all changes occurring in 0.2 seconds.
-    Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model.
+  To enhance accessibility and interactivity, the project applies the :focus pseudo-class to links altering the body's content. 
+This emphasizes the current page by setting a background color, adding a border, and adjusting the font color for improved visual clarity. 
+Additionally, the :hover pseudo-class introduces animations for links affecting the body content, mirroring the properties of :focus but with a wider border for distinction.
+A transition property ensures smooth transitions, with changes occurring over 0.2 seconds. Leveraging the Google Chart library and JavaScript, the project creates two pie charts to visualize the precision and accuracy of the model,
+enhancing data representation and user engagement. To clarify, the table data is made scrollable, ensuring that users can navigate through large datasets with ease, facilitating efficient data exploration and analysis.
 
 - ### Data
     To enhance the accuracy of our probability estimates, we merged the contents of 'ham1' and 'ham2' directories into a single 'ham' dataset. 
@@ -98,5 +100,5 @@ By combining these datasets, our model gained a deeper understanding of typical 
 
 
 ## Other Resources
- Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model. The link for this library is in the head section of the `index.html` file and needs to be loaded to the project in order to see the charts, to do this go to the `index.html` file and IntelliJ will tell you to download the library.
+  The project utilizes the Google Chart library for creating pie charts to visualize precision and accuracy data.
 
