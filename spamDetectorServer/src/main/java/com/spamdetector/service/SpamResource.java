@@ -19,27 +19,28 @@ import org.json.JSONObject;
 @Path("/spam")
 public class SpamResource {
 
-//    your SpamDetector Class responsible for all the SpamDetecting logic
+    //    your SpamDetector Class responsible for all the SpamDetecting logic
     SpamDetector detector = new SpamDetector();
+   //We're running spamDetector just once to get the list of results and then store into this variable
     private List<TestFile> results=new ArrayList<>();
 
 
     SpamResource() throws IOException {
-//        TODO: load resources, train and test to improve performance on the endpoint calls
+        // TODO: load resources, train and test to improve performance on the endpoint calls
         System.out.print("Training and testing the model, please wait");
 
-//      TODO: call  this.trainAndTest()
+        //TODO: call  this.trainAndTest()
       this.results=trainAndTest();
 
 
     }
-    // In the end delete it, fix getspamResults! using it to make testing esaiser
 
 
     @GET
     @Produces("application/json")
     public Response getSpamResults() throws IOException {
-//       TODO: return the test results list of TestFile, return in a Response object
+
+        //  TODO: return the test results list of TestFile, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
                 entity(results).build();
@@ -53,7 +54,7 @@ public class SpamResource {
         //return the accuracy of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(calculatePrecision(results)).build();
+                entity(calculateAccuracy()).build();
     }
 
     @GET
@@ -63,53 +64,14 @@ public class SpamResource {
         //return the precision of the detector, return in a Response object
         return Response.status(200).header("Access-Control-Allow-Origin","http://localhost:63342")
                 .header("Content-Type","application/json").
-                entity(calculateAccuracy(results)).build();
+                entity(calculatePrecision()).build();
 
     }
-    public String TestingProb() throws JsonProcessingException {
-        URL url =this.getClass().getClassLoader().getResource("/data");
-        File mainDirectory = null;
-        try {
-            mainDirectory= new File(url.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            this.detector.trainAndTest(mainDirectory);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        TreeMap<String, Double> p=this.detector.gettestingProb();
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(p);
-    };
-    public String TestingMaps() throws JsonProcessingException {
-        URL url =this.getClass().getClassLoader().getResource("/data");
-        File mainDirectory = null;
-        try {
-            assert url != null;
-            mainDirectory= new File(url.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            this.detector.trainAndTest(mainDirectory);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        ArrayList<TreeMap<String,Integer>> listOfFiles=this.detector.getWordsInFile();
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(listOfFiles);
-    }
-        // This function basically calls the detector.trainAndTest with a given directory
-    private String returnFilesResponse(List<TestFile> results) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(results);
-    };
+
 
 
     //Calculates accuracy and returns a Map object with key string "accuracy" and value of calculated accuracy
-    private TreeMap<String, Double> calculateAccuracy(List<TestFile> results) throws IOException {
+    private TreeMap<String, Double> calculateAccuracy() throws IOException {
         double accuracy=0;
         int truePositive=0;
         int trueNegative=0;
@@ -132,7 +94,7 @@ public class SpamResource {
     }
 
     //Calculates precision and returns a Map object with key string "precision" and value of calculated precision
-    private TreeMap<String, Double> calculatePrecision(List<TestFile> results) throws IOException {
+    private TreeMap<String, Double> calculatePrecision() throws IOException {
         int truePositive=0;
         int trueNegative=0;
         int falsePositive=0;
@@ -160,7 +122,7 @@ public class SpamResource {
             this.detector = new SpamDetector();
         }
 
-//        TODO: load the main directory "data" here from the Resources folder
+        //TODO: load the main directory "data" here from the Resources folder
         URL url =this.getClass().getClassLoader().getResource("/data");
         File mainDirectory = null;
         try {
@@ -170,6 +132,7 @@ public class SpamResource {
             throw new RuntimeException(e);
         }
         try {
+            //we're calling trainAndTest function of detector, passing it the directory opf our data resources
             return this.detector.trainAndTest(mainDirectory);
         } catch (IOException e) {
             throw new RuntimeException(e);

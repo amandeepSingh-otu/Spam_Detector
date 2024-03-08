@@ -7,7 +7,7 @@
     - SpamDetectorServer: Java and JAX-RS
 
 - ### Client Side
-The client side fetches data from an API called "ka" to display files in table formats and obtain accuracy and precision using different APIs.
+    The client side fetches data from an API called "ka" to display files in table formats and obtain accuracy and precision using different APIs.
 
 - ### Server Side
     The whole process of server side can be explained as following:

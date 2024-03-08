@@ -1,8 +1,6 @@
 package com.spamdetector.domain;
 
-import java.text.DecimalFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.ws.rs.Path;
 
 /**
  * This class represents a file from the testing data
