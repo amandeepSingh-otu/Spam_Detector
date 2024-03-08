@@ -98,3 +98,5 @@ By combining these datasets, our model gained a deeper understanding of typical 
 
 
 ## Other Resources
+ Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model. The link for this library is in the head section of the `index.html` file and needs to be loaded to the project in order to see the charts, to do this go to the `index.html` file and IntelliJ will tell you to download the library.
+
