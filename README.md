@@ -69,6 +69,10 @@ The client side fetches data from an API called "ka" to display files in table f
 
 - ### User Interface Improvements
 
+    Apply the :focus pseudo-class to the links that alter the body's content, emphasizing the current page by setting a background color, adding a border, and adjusting the font color.
+    Implement the :hover pseudo-class to generate an animation for links influencing the body content. This pseudo-class mirrors the properties of the :focus pseudo-class but features a wider border for distinction. Additionally, introduce a transition property to ensure a smooth transition with all changes occurring in 0.2 seconds.
+    Utilize the Google Chart library and JavaScript to create two pie charts that visualize the precision and accuracy of the model.
+
 - ### Data
     To enhance the accuracy of our probability estimates, we merged the contents of 'ham1' and 'ham2' directories into a single 'ham' dataset. 
 This consolidation allowed us to incorporate a broader range of legitimate email vocabulary, leading to more refined probability calculations.
