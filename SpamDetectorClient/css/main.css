@@ -373,13 +373,15 @@ a{
 a:hover {
   color: white;
 
-  transition-delay: 50ms;
+
 
   text-decoration-color: #1b4172;
   background-color: #1b4172;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
+  transition: all 0.2s ease;
+
 }
 a:focus {
   outline: none;
@@ -405,7 +407,7 @@ img{
   align-content: end;
   gap: 8px;
 }
-.bar {
+.chart {
   height: 50px;
   width: 50px;
   margin-left: 50px;
@@ -415,13 +417,13 @@ img{
   cursor: pointer;
 
 
-
 }
 .pie-div{
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 12px;
+
 
 }
 

@@ -1,8 +1,8 @@
 // TODO: onload function should retrieve the data needed to populate the UI
-let divbody=document.getElementById("body-sec").innerHTML;
-let acuarcyOuput;
+let divBody=document.getElementById("body-sec").innerHTML;
+let accuracyOutput;
 let precisionOutput;
-let accuarcy;
+let accuracy;
 let precision;
 let tableBody;
 let tableData ;
@@ -12,15 +12,15 @@ function loadAbout() {
 
 }
 function loadBody(){
-  document.getElementById("body-sec").innerHTML = divbody;
-  document.getElementById("accuracy").innerHTML = acuarcyOuput.value;
+  document.getElementById("body-sec").innerHTML = divBody;
+  document.getElementById("accuracy").innerHTML = accuracyOutput.value;
   document.getElementById("precision").innerHTML = precisionOutput.value;
-  drawChart(accuarcy,"accuracyPie");
+  drawChart(accuracy,"accuracyPie");
   drawChart(precision,"precisionPie");
   populateSpamTable(tableData);
 
 }
-function requestAccuarcy(){
+function requestAccuracy(){
   let apiUrl = "http://localhost:8080/spamDetector-1.0/api/spam/accuracy" ;
   fetch(apiUrl, {
     method: 'GET',
@@ -29,15 +29,12 @@ function requestAccuarcy(){
     }
 
   }).then(response => response.json())
-    .then(response=> loadAcuarcy(response))
+    .then(response=> loadAccuracy(response))
     .catch((err) => {
       console.log("something went wrong: " + err);
     });
-
-
-
 }
-function requestPreciosn(){
+function requestPrecision(){
   let apiUrl = "http://localhost:8080/spamDetector-1.0/api/spam/precision" ;
   fetch(apiUrl, {
     method: 'GET',
@@ -55,26 +52,19 @@ function requestPreciosn(){
 function loadPrecision(response){
   precisionOutput = document.getElementById("precision");
   precision = (response.accuracy*100);
-
-
   drawChart(precision,"precisionPie");
 
   precisionOutput.value = precision.toFixed(2) +"%";
 
-
 }
 
-function loadAcuarcy(response){
+function loadAccuracy(response){
 
-  acuarcyOuput = document.getElementById('accuracy');
-  accuarcy = (response.precision*100);
+  accuracyOutput = document.getElementById('accuracy');
+  accuracy = (response.precision*100);
+  drawChart(accuracy,"accuracyPie");
 
- // document.getElementById('accuracyBar').style.width = `${accuarcy}%`;
-  drawChart(accuarcy,"accuracyPie");
-
-  acuarcyOuput.value = accuarcy.toFixed(2) + "%";
-
-
+  accuracyOutput.value = accuracy.toFixed(2) + "%";
 }
 
 function fetchSpamData() {
@@ -118,8 +108,8 @@ function populateSpamTable(data) {
 
 (function () {
  // requestDataFromServer(apiUrl);
-  requestAccuarcy();
-  requestPreciosn();
+  requestAccuracy();
+  requestPrecision();
   fetchSpamData();
 
 })();
@@ -134,13 +124,9 @@ function drawChart(value,id) {
     ['Category 1', value],
     ['Category 2', 100-value],
   ]);
-
   let options = {
-
     legend: 'none', // Set legend to 'none' to hide it
   };
-
-
   let chart = new google.visualization.PieChart(document.getElementById(id));
 
   chart.draw(data, options);
