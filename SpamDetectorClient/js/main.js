@@ -51,7 +51,7 @@ function requestPrecision(){
 }
 function loadPrecision(response){
   precisionOutput = document.getElementById("precision");
-  precision = (response.accuracy*100);
+  precision = (response.value*100);
   drawChart(precision,"precisionPie");
 
   precisionOutput.value = precision.toFixed(2) +"%";
@@ -61,7 +61,7 @@ function loadPrecision(response){
 function loadAccuracy(response){
 
   accuracyOutput = document.getElementById('accuracy');
-  accuracy = (response.precision*100);
+  accuracy = (response.value*100);
   drawChart(accuracy,"accuracyPie");
 
   accuracyOutput.value = accuracy.toFixed(2) + "%";

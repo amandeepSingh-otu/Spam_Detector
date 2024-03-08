@@ -24,14 +24,6 @@ public class SpamDetector {
    String[] commonWordsArray={"I", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them","my","your",
            "his", "its", "our", "their", "a", "an", "the", "and", "in", "of", "on", "with", "to", "for", "from", "at","  "," ",""};
 
-   //So we are being lazy and instead of sorting the common words, we're letting java do that for us
-   public SpamDetector(){
-       //sorting the common words so we can find them easily
-       commonWords.addAll(Arrays.asList(commonWordsArray));
-       commonWords.sort(Comparator.naturalOrder());
-
-   };
-
 
     /*This function take subdirectory train/spam or train/ham and a flag (to check if it's training ham or spam data) to train the model
         and save results in our attributes containing words and the number of files they are in
@@ -142,6 +134,9 @@ public class SpamDetector {
     //This trainAndTest is where the whole process starts, This function takes a directory and run training function and then test on our test Files
     public List<TestFile> trainAndTest(File mainDirectory) throws IOException {
     //TODO: main method of loading the directories and files, training and testing the model
+        //So we are being lazy and instead of sorting the common words, we're letting java do that for us
+        commonWords.addAll(Arrays.asList(commonWordsArray));
+        commonWords.sort(Comparator.naturalOrder());
         train(mainDirectory);
         return test(mainDirectory);
     }
