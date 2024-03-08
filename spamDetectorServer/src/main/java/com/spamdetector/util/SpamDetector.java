@@ -31,7 +31,7 @@ public class SpamDetector {
     public void numberOfOccurrence(String directory, File[] fileArrays, boolean isHam) throws IOException {
             //going to go through each file in subdirectory and check for numbers
         for(File file: fileArrays){
-            ArrayList<String> lineWords = getStrings(directory,file);
+            ArrayList<String> lineWords = getStringsInAFile(directory,file);
             for(String word:lineWords){
                 if(isHam){
                     //check if we already have those words im map, if we do it increase the count, otherwise it add that word with count 1
@@ -48,7 +48,7 @@ public class SpamDetector {
 
 
     // This function take directory and file name, the locate the files, read it, split it using regex and return all the words found in file
-    private ArrayList<String> getStrings(String directory, File file) throws IOException {
+    private ArrayList<String> getStringsInAFile(String directory, File file) throws IOException {
         ArrayList<String> wordsInFile=new ArrayList<>();
         FileReader fileReader = null;
         directory=directory+"\\"+file.getName();
