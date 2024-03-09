@@ -8,7 +8,7 @@
 
 - ### Client Side
   This project leverages JavaScript to fetch data from a server-side APIs, subsequently displaying the retrieved data in both tabular and chart formats on the client side.
-The data is dynamically loaded into an HTML table for easy visualization and the accuracy and precision is displayed graphically using charts, facilitating better comprehension of the dataset's trends and insights.
+The data is dynamically loaded into an HTML table for easy visualization and the accuracy and precision are displayed graphically using charts, facilitating better comprehension of the dataset's trends and insights.
 
 - ### Server Side
     The whole process of server side can be explained as following:
@@ -18,7 +18,7 @@ The data is dynamically loaded into an HTML table for easy visualization and the
       - We Read all files in the training/ham and training/spam folders, each containing ham and spam files.
 
     - #### Word Frequency Calculation
-      - We Counted how many files contain each word which appear in either spam of ham.
+      - We Counted how many files contain each word which appear in either spam or ham.
       - We Created two frequency Tree maps:
           - `HamOccurances`: Map of words to the number of files containing each word in the ham folder.
           - `spamOccurances`: Map of words to the number of files containing each word in the spam folder.
