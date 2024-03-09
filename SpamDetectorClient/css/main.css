@@ -408,8 +408,8 @@ img{
   gap: 8px;
 }
 .chart {
-  height: 50px;
-  width: 50px;
+  height: 200px;
+  width: 200px;
   margin-left: 50px;
   border: solid;
   border-radius: 100%;
@@ -426,6 +426,7 @@ img{
 
 
 }
+
 
 table{
   overflow-y:scroll;
